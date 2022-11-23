@@ -1,26 +1,58 @@
-import { addTodo } from "../ts/functions";
+import { addTodo, changeTodo, removeAllTodos } from "../ts/functions";
 import { Todo } from "../ts/models/Todo";
 
-test("adds to list", () => {
-  //Arrange
-  let myText: string = "hello";
-  let myTodos: Todo[] = [];
+describe("add to list", () => {
+  test("adds to list", () => {
+    //Arrange
+    let myText: string = "hello";
+    let myTodos: Todo[] = [new Todo("handla", false)];
+    //Act
+    addTodo(myText, myTodos);
+    //Assert
+    expect(myTodos.length).toBe(2);
+  });
 
-  //Act
-  addTodo(myText, myTodos);
-
-  //Assert
-  expect(myTodos.length).toBe(1);
+  test("Do not add to list", () => {
+    //Arrange
+    let myText: string = "";
+    let myTodos: Todo[] = [];
+    //Act
+    addTodo(myText, myTodos);
+    //Assert
+    expect(myTodos.length).toBe(0);
+  });
 });
 
-test("Do not add to list", () => {
-  //Arrange
-  let myText: string = "";
-  let myTodos: Todo[] = [];
+describe("from false to true and reverse", () => {
+  test("change todo from false to true", () => {
+    let myTodos: Todo = new Todo("handla", false);
+    changeTodo(myTodos);
+    expect(myTodos.done).toBe(true);
+  });
 
-  //Act
-  addTodo(myText, myTodos);
+  test("change todo from true to false", () => {
+    let myTodos: Todo = new Todo("handla", true);
+    changeTodo(myTodos);
+    expect(myTodos.done).toBe(false);
+  });
+});
 
-  //Assert
-  expect(myTodos.length).toBe(0);
+describe("removes from list", () => {
+  test("removes the list", () => {
+    //Arrange
+    let myTodos: Todo[] = [new Todo("handla", true)];
+    //Act
+    removeAllTodos(myTodos);
+    //Assert
+    expect(myTodos.length).toBe(0);
+  });
+
+  test("removes the list, works on empty list", () => {
+    //Arrange
+    let myTodos: Todo[] = [];
+    //Act
+    removeAllTodos(myTodos);
+    //Assert
+    expect(myTodos.length).toBe(0);
+  });
 });

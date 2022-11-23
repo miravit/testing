@@ -82,3 +82,5 @@ function clearTodos(todos: Todo[]) {
 }
 
 createHtml(todos);
+
+console.log("hej");
