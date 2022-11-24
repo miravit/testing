@@ -64,3 +64,25 @@ describe("createNewTodo()", () => {
     expect(spy).toBeCalledTimes(1);
   });
 });
+
+describe("createHTML", () => {
+  test("adds in localstorage", () => {
+    let list: Todo[] = [new Todo("someText", false)];
+
+    //act
+    localStorage.setItem("todos", JSON.stringify(list));
+
+    //assert
+    expect(localStorage.length).toBe(1);
+  });
+  test("empty the list before loop", () => {
+    let list: Todo[] = [new Todo("someText", false)];
+    document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
+
+    //act
+    functions.createHtml(list);
+
+    //assert
+    expect(document.getElementById("todos")?.innerHTML).toBe("");
+  });
+});

@@ -38,7 +38,7 @@ export function createNewTodo(todoText: string, todos: Todo[]) {
 }
 
 export function createHtml(todos: Todo[]) {
-  localStorage.setItem("todos", JSON.stringify(todos));
+  exports.localStorage.setItem("todos", JSON.stringify(todos));
 
   let todosContainer: HTMLUListElement = document.getElementById(
     "todos"
