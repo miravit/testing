@@ -1,7 +1,3 @@
-/**
- *@jest-environment jsdom
- */
-
 import { addTodo, changeTodo, removeAllTodos } from "./functions";
 import { Todo } from "./models/Todo";
 
@@ -38,7 +34,7 @@ export function createNewTodo(todoText: string, todos: Todo[]) {
 }
 
 export function createHtml(todos: Todo[]) {
-  exports.localStorage.setItem("todos", JSON.stringify(todos));
+  localStorage.setItem("todos", JSON.stringify(todos));
 
   let todosContainer: HTMLUListElement = document.getElementById(
     "todos"
@@ -65,7 +61,8 @@ export function createHtml(todos: Todo[]) {
 
 export function toggleTodo(todo: Todo) {
   changeTodo(todo);
-  createHtml(todos);
+  console.log("hej", todo);
+  exports.createHtml(todos);
 }
 
 export function displayError(error: string, show: boolean) {
@@ -84,7 +81,7 @@ export function displayError(error: string, show: boolean) {
 
 export function clearTodos(todos: Todo[]) {
   removeAllTodos(todos);
-  createHtml(todos);
+  exports.createHtml(todos);
 }
 
 //createHtml(todos);
