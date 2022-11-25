@@ -30,6 +30,7 @@ export function createNewTodo(todoText: string, todos: Todo[]) {
     exports.createHtml(todos);
   } else {
     exports.displayError(result.error, true);
+    console.log("hejbajs", result.error);
   }
 }
 

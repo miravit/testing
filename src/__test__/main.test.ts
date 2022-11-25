@@ -7,24 +7,6 @@ import * as addfunctions from "../ts/functions";
 import { Todo } from "../ts/models/Todo";
 import * as functions from "./../ts/main";
 
-/* describe("inittwo", () => {
-  test("should be able to click", () => {
-    //arrange
-    let spy = jest.spyOn(functions, "createNewTodo").mockReturnValue();
-    document.body.innerHTML = `<form id="newTodoForm"><button>Skapa</button></form>`;
-    let toDoText: string = "hej";
-    let todos: Todo[] = [];
-    functions.initTwo();
-
-    ///act
-    document.getElementById("newTodoForm")? //submitevent??
-
-    //assert
-    expect(spy).toHaveBeenCalled();
-    expect(spy).toBeCalledWith(toDoText, todos);
-  });
-}); */
-
 describe("createNewTodo()", () => {
   test("if the result.success==true", () => {
     let list: Todo[] = [];
@@ -51,6 +33,23 @@ describe("createNewTodo()", () => {
     expect(spy).toBeCalledTimes(1);
   });
 });
+/* describe("inittwo", () => {
+  test("should be able to click", () => {
+    //arrange
+    let spy = jest.spyOn(functions, "createNewTodo").mockReturnValue();
+    document.body.innerHTML = `<form id="newTodoForm"><button>Skapa</button></form>`;
+    //let toDoText: string = "hej";
+    //let todos: Todo[] = [];
+    functions.initTwo();
+
+    ///act
+    document.getElementById("newTodoForm")?.onsubmit; //submitevent??
+
+    //assert
+    expect(spy).toHaveBeenCalled();
+    //expect(spy).toBeCalledWith(toDoText, todos);
+  });
+}); */
 
 /* describe("createHTML", () => {
   //denna är inte klar
@@ -66,17 +65,17 @@ describe("createNewTodo()", () => {
     //assert
     expect(spy).toHaveBeenCalledTimes(1);
   }); */
-/* 
-  test("empty the list before loop", () => {
-    let list: Todo[] = [new Todo("someText", false)];
-    document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
 
-    //act
-    functions.createHtml(list);
+test("empty the list before loop", () => {
+  let list: Todo[] = [new Todo("someText", false)];
+  document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
 
-    //assert
-    expect(document.getElementById("todos")?.innerHTML).toBe("");
-  }); */
+  //act
+  functions.createHtml(list);
+
+  //assert
+  expect(document.getElementById("todos")?.innerHTML).toBe("");
+});
 /* }); */
 describe("toggleTodo", () => {
   test("send to function", () => {
@@ -99,19 +98,6 @@ describe("toggleTodo", () => {
   });
 });
 
-/* describe("displayError", () => {
-  test("adds in localstorage", () => {
-    let list: Todo[] = [new Todo("someText", false)];
-
-    //act
-    localStorage.setItem("todos", JSON.stringify(list));
-
-    //assert
-    expect(localStorage.length).toBe(1);
-  });
-}); 
- */
-
 describe("clearTodos", () => {
   test("should call functions", () => {
     let list: Todo[] = [new Todo("someText", false)];
@@ -123,22 +109,69 @@ describe("clearTodos", () => {
     //assert
     expect(spy).toHaveBeenCalledTimes(1);
   });
+  test("should run function createHtml", () => {
+    //Arrange
+    let todos: Todo[] = [new Todo("text", false)];
+    let spy = jest.spyOn(functions, "createHtml").mockReturnValue();
+
+    //Act
+    functions.clearTodos(todos);
+
+    //Assert
+    expect(spy).toHaveBeenCalled();
+  });
 });
 
 test("should be able to click", () => {
   //Arrange
 
   let spy = jest.spyOn(functions, "clearTodos").mockReturnValue();
-
   document.body.innerHTML = `<button type="button" id="clearTodos">Rensa lista</button>`;
-
   functions.initOne();
 
   //Act
-
   document.getElementById("clearTodos")?.click();
 
   //Assert
-
   expect(spy).toHaveBeenCalled();
 });
+/* describe("inittwo", () => {
+  test("should be able to click", () => {
+    //arrange
+    let spy = jest.spyOn(functions, "createNewTodo").mockReturnValue();
+    document.body.innerHTML = `<form id="newTodoForm"><button>Skapa</button></form>`;
+    let toDoText: string = "hej";
+    let todos: Todo[] = [new Todo("someText", false)];
+    functions.initTwo();
+
+    ///act
+    document.getElementById("newTodoForm")?.onsubmit; //submitevent??
+
+    //assert
+    //expect(spy).toHaveBeenCalled();
+    expect(spy).toBeCalledWith(toDoText, todos);
+  });
+}); */
+
+/*  describe("displayError", () => {
+  test("adds classlist show", () => {
+    //arrange
+    let error: string = "Du måste ange minst två bokstäver";
+    let show: boolean = true;
+    document.body.innerHTML = `"div id="error" class="error"></div>"`;
+    //act
+    functions.displayError(error, show);
+    //assert
+    expect(document.getElementById("error")?.classList.add).toBe("show");
+  });
+  test("removes classlist show", () => {
+    //arrange
+    let error: string = "Du måste ange minst två bokstäver";
+    let show: boolean = false;
+    document.body.innerHTML = `"div id="error" class="error"></div>"`;
+    //act
+    functions.displayError(error, show);
+    //assert
+    expect(document.getElementById("error")?.classList.remove).toBe("show");
+  });
+}); */
